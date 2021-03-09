@@ -1,5 +1,7 @@
 # CommNets
-
+----------------------------------------------------------------------------------------------------------------
+PROJECT 1
+---------
 to run:
 python3 port_checker.py hostname start_port:end_port
 
@@ -12,3 +14,4 @@ if no hostname is specified, it will check local host from 1-1024
 must input hostname (including local host) in order to check specific ports rather than all ports between 1-1024
 
 example: python3 port_checker.py 8.8.8.8 400:450
+----------------------------------------------------------------------------------------------------------------
