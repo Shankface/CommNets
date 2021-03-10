@@ -7,6 +7,7 @@ socket.setdefaulttimeout(0.3)
 #set default host and range
 ip = '127.0.0.1'
 rang = [1, 1024]
+noPorts = True
 
 # if user inputs host, set default host to inputted host
 if len(sys.argv) > 1:
@@ -26,9 +27,19 @@ for x in range(int(rang[0]), int(rang[1])+1):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     result = sock.connect_ex((ip, x))
     
-    if result == 0: 
-        print("Port " + str(x) + " is open")
-    elif result == 11:
-        print("Port " + str(x) + " is filtered")
+    if result == 0:
+        noPorts = False
+        try: 
+            print("Port " + str(x) + ": OPEN        " +"Default: " + socket.getservbyport(x))
+        except: 
+            print("Port " + str(x) + ": OPEN        " +"Default: NOT SPECIFIED")
 
+    elif result == 11:
+        noPorts = False
+        try: 
+            print("Port " + str(x) + ": FILTERED    " +"Default: " + socket.getservbyport(x))
+        except: 
+            print("Port " + str(x) + ": FILTERED    " +"Default: NOT SPECIFIED")
+
+if noPorts: print("No ports are open or filtered")
 sock.close()
